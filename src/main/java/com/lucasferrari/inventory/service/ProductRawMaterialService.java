@@ -1,5 +1,6 @@
 package com.lucasferrari.inventory.service;
 
+import com.lucasferrari.inventory.dto.ProductRawMaterialDTO;
 import com.lucasferrari.inventory.entity.Product;
 import com.lucasferrari.inventory.entity.ProductRawMaterial;
 import com.lucasferrari.inventory.entity.RawMaterial;
@@ -19,27 +20,29 @@ public class ProductRawMaterialService {
     private final ProductRepository productRepository;
     private final RawMaterialRepository rawMaterialRepository;
 
-    public ProductRawMaterial linkRawMaterialToProduct(
+    public ProductRawMaterialDTO linkRawMaterialToProduct(
             Long productId,
             Long rawMaterialId,
             Integer requiredQuantity
     ) {
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found, please confirm the existence of the ID"));
+                .orElseThrow(() -> new RuntimeException("Product not found"));
 
         RawMaterial rawMaterial = rawMaterialRepository.findById(rawMaterialId)
-                .orElseThrow(() -> new RuntimeException("Raw material not found, please confirm the existence of the ID"));
+                .orElseThrow(() -> new RuntimeException("Raw material not found"));
 
-        ProductRawMaterial productRawMaterial = ProductRawMaterial.builder()
+        ProductRawMaterial prm = ProductRawMaterial.builder()
                 .product(product)
                 .rawMaterial(rawMaterial)
                 .requiredQuantity(requiredQuantity)
                 .build();
 
-        return productRawMaterialRepository.save(productRawMaterial);
-    }
+        ProductRawMaterial saved = productRawMaterialRepository.save(prm);
 
-    public List<ProductRawMaterial> findByProduct(Long productId) {
-        return productRawMaterialRepository.findByProductId(productId);
+        return ProductRawMaterialDTO.builder()
+                .productId(saved.getProduct().getId())
+                .RawMaterialId(saved.getRawMaterial().getId())
+                .requiredQuantity(saved.getRequiredQuantity())
+                .build();
     }
 }
