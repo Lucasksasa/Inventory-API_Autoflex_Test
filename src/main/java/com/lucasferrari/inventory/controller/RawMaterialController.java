@@ -1,6 +1,7 @@
 package com.lucasferrari.inventory.controller;
 
 import com.lucasferrari.inventory.dto.RawMaterialDTO;
+import com.lucasferrari.inventory.entity.RawMaterial;
 import com.lucasferrari.inventory.service.RawMaterialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,22 +17,21 @@ public class RawMaterialController {
 
     @PostMapping
     public RawMaterialDTO create(@RequestBody RawMaterialDTO dto) {
-        return rawMaterialService.save(dto);
-    }
 
-    @GetMapping
-    public List<RawMaterialDTO> findAll() {
-        return rawMaterialService.findAll();
-    }
+        RawMaterial rm = RawMaterial.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .stockQuantity(dto.getStockQuantity())
+                .build();
 
-    @GetMapping("/{id}")
-    public RawMaterialDTO findById(@PathVariable Long id) {
-        return rawMaterialService.findById(id);
-    }
+        RawMaterial saved = rawMaterialService.save(rm);
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        rawMaterialService.delete(id);
+        return RawMaterialDTO.builder()
+                .id(saved.getId())
+                .name(saved.getName())
+                .stockQuantity(saved.getStockQuantity())
+                .build();
     }
 }
+
 
