@@ -41,7 +41,7 @@ public class ProductRawMaterialService {
 
         return ProductRawMaterialDTO.builder()
                 .productId(saved.getProduct().getId())
-                .RawMaterialId(saved.getRawMaterial().getId())
+                .rawMaterialId(saved.getRawMaterial().getId())
                 .requiredQuantity(saved.getRequiredQuantity())
                 .build();
     }

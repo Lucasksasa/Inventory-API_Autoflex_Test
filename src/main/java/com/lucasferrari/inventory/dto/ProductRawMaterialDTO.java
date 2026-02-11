@@ -10,6 +10,6 @@ import lombok.*;
 public class ProductRawMaterialDTO {
 
     private Long productId;
-    private Long RawMaterialId;
+    private Long rawMaterialId;
     private Integer requiredQuantity;
 }
