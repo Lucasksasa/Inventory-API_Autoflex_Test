@@ -1,6 +1,6 @@
 package com.lucasferrari.inventory.controller;
 
-import com.lucasferrari.inventory.dto.ProductDTO;
+import com.lucasferrari.inventory.dto.ProductionResultDTO;
 import com.lucasferrari.inventory.service.ProductionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductionController {
 
     @GetMapping("/available")
-    public List<ProductDTO> getAvailableProducts() {
+    public List<ProductionResultDTO> getAvailableProducts() {
         return productionService.findProductsAvailableForProduction();
     }
 

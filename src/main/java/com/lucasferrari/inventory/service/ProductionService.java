@@ -1,6 +1,7 @@
 package com.lucasferrari.inventory.service;
 
 import com.lucasferrari.inventory.dto.ProductDTO;
+import com.lucasferrari.inventory.dto.ProductionResultDTO;
 import com.lucasferrari.inventory.entity.Product;
 import com.lucasferrari.inventory.entity.ProductRawMaterial;
 import com.lucasferrari.inventory.repository.ProductRawMaterialRepository;
@@ -8,6 +9,7 @@ import com.lucasferrari.inventory.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +20,14 @@ public class ProductionService {
     private final ProductRepository productRepository;
     private final ProductRawMaterialRepository productRawMaterialRepository;
 
-    public List<ProductDTO> findProductsAvailableForProduction() {
+    public List<ProductionResultDTO> findProductsAvailableForProduction() {
 
         List<Product> products = productRepository.findAll();
-        List<ProductDTO> result = new ArrayList<>();
+
+        // Ordena por preço DESC (mais caro primeiro)
+        products.sort((p1, p2) -> p2.getPrice().compareTo(p1.getPrice()));
+
+        List<ProductionResultDTO> result = new ArrayList<>();
 
         for (Product product : products) {
 
@@ -32,24 +38,30 @@ public class ProductionService {
                 continue;
             }
 
-            boolean canProduce = true;
+            Integer maxQuantity = Integer.MAX_VALUE;
 
             for (ProductRawMaterial prm : materials) {
-                if (prm.getRawMaterial().getStockQuantity() < prm.getRequiredQuantity()) {
-                    canProduce = false;
-                    break;
-                }
+                int possible =
+                        prm.getRawMaterial().getStockQuantity() / prm.getRequiredQuantity();
+                maxQuantity = Math.min(maxQuantity, possible);
             }
 
-            if (canProduce) {
-                result.add(
-                        ProductDTO.builder()
-                                .id(product.getId())
-                                .name(product.getName())
-                                .price(product.getPrice())
-                                .build()
-                );
+            if (maxQuantity <= 0) {
+                continue;
             }
+
+            BigDecimal totalValue =
+                    product.getPrice().multiply(BigDecimal.valueOf(maxQuantity));
+
+            result.add(
+                    ProductionResultDTO.builder()
+                            .productId(product.getId())
+                            .productName(product.getName())
+                            .unitPrice(product.getPrice())
+                            .quantityToProduce(maxQuantity)
+                            .totalValue(totalValue)
+                            .build()
+            );
         }
 
         return result;
