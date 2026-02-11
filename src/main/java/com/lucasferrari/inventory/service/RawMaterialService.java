@@ -1,6 +1,5 @@
 package com.lucasferrari.inventory.service;
 
-import com.lucasferrari.inventory.dto.RawMaterialDTO;
 import com.lucasferrari.inventory.entity.RawMaterial;
 import com.lucasferrari.inventory.repository.RawMaterialRepository;
 import lombok.RequiredArgsConstructor;
