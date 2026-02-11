@@ -1,10 +1,8 @@
 package com.lucasferrari.inventory.controller;
 
 import com.lucasferrari.inventory.dto.ProductRawMaterialDTO;
-import com.lucasferrari.inventory.entity.ProductRawMaterial;
 import com.lucasferrari.inventory.service.ProductRawMaterialService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +22,16 @@ public class ProductRawMaterialController {
     ) {
         return productRawMaterialService
                 .linkRawMaterialToProduct(productId, rawMaterialId, requiredQuantity);
+    }
+
+    @GetMapping("/product/{productId}")
+    public List<ProductRawMaterialDTO> findByProduct(@PathVariable Long productId) {
+        return productRawMaterialService.findByProductId(productId);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        productRawMaterialService.delete(id);
     }
 }
 

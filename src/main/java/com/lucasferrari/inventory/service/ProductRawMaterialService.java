@@ -45,4 +45,20 @@ public class ProductRawMaterialService {
                 .requiredQuantity(saved.getRequiredQuantity())
                 .build();
     }
+
+    public List<ProductRawMaterialDTO> findByProductId(Long productId) {
+        return productRawMaterialRepository.findByProductId(productId)
+                .stream()
+                .map(prm -> ProductRawMaterialDTO.builder()
+                        .productId(prm.getProduct().getId())
+                        .rawMaterialId(prm.getRawMaterial().getId())
+                        .requiredQuantity(prm.getRequiredQuantity())
+                        .build())
+                .toList();
+    }
+
+    public void delete(Long id) {
+        productRawMaterialRepository.deleteById(id);
+    }
+
 }

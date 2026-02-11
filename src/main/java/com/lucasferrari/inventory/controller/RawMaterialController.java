@@ -32,6 +32,35 @@ public class RawMaterialController {
                 .stockQuantity(saved.getStockQuantity())
                 .build();
     }
+
+    @GetMapping
+    public List<RawMaterialDTO> findAll() {
+        return rawMaterialService.findAll()
+                .stream()
+                .map(rm -> RawMaterialDTO.builder()
+                        .id(rm.getId())
+                        .name(rm.getName())
+                        .stockQuantity(rm.getStockQuantity())
+                        .build())
+                .toList();
+    }
+
+    @GetMapping("/{id}")
+    public RawMaterialDTO findById(@PathVariable Long id) {
+        RawMaterial rm = rawMaterialService.findById(id);
+
+        return RawMaterialDTO.builder()
+                .id(rm.getId())
+                .name(rm.getName())
+                .stockQuantity(rm.getStockQuantity())
+                .build();
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        rawMaterialService.delete(id);
+    }
 }
+
 
 
