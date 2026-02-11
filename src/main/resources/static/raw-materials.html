@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raw Materials</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>Raw Materials</h1>
+
+<h2>Add raw material</h2>
+<input type="text" id="name" placeholder="Raw material name">
+<input type="number" id="stockQuantity" placeholder="Stock quantity">
+<button onclick="createRawMaterial()">Add</button>
+
+<h2>Raw material list</h2>
+<button onclick="loadRawMaterials()">Load raw materials</button>
+
+<ul id="rawMaterialList"></ul>
+
+<script src="js/raw-materials.js"></script>
+</body>
+</html>

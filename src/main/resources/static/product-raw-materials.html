@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associate Raw Materials to Products</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1>Associate Raw Materials to Products</h1>
+
+<div>
+    <label for="productSelect">Product:</label>
+    <select id="productSelect"></select>
+</div>
+
+<div>
+    <label for="rawMaterialSelect">Raw Material:</label>
+    <select id="rawMaterialSelect"></select>
+</div>
+
+<div>
+    <label for="requiredQuantity">Required Quantity:</label>
+    <input type="number" id="requiredQuantity" min="1" value="1">
+</div>
+
+<button id="linkBtn">Link Raw Material</button>
+
+<h2>Linked Raw Materials</h2>
+<ul id="linkedList"></ul>
+
+<script src="js/product-raw-materials.js"></script>
+</body>
+</html>
