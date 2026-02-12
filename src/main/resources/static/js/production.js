@@ -5,7 +5,7 @@ fetchBtn.addEventListener('click', () => {
     fetch('/production/available')
         .then(response => response.json())
         .then(data => {
-            tableBody.innerHTML = ''; // limpa a tabela antes de preencher
+            tableBody.innerHTML = '';
             data.forEach(product => {
                 const row = document.createElement('tr');
 

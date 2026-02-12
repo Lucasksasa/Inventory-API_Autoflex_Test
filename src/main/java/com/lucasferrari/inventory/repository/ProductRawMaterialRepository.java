@@ -8,5 +8,5 @@ import java.util.List;
 public interface ProductRawMaterialRepository extends JpaRepository<ProductRawMaterial, Long> {
 
     List<ProductRawMaterial> findByProductId(Long productId);
-    List<ProductRawMaterial> findByRawMaterialId(Long rawMaterial);
+
 }

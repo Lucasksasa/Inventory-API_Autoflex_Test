@@ -16,7 +16,7 @@ button {
 
 table {
     width: 100%;
-    border-collapse: collapse; /* Faz as bordas se juntarem */
+    border-collapse: collapse;
 }
 
 thead th {
@@ -32,9 +32,9 @@ tbody td {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #fafafa; /* Zebra striping */
+    background-color: #fafafa;
 }
 
 tbody tr:hover {
-    background-color: #f1f1f1; /* Highlight ao passar o mouse */
+    background-color: #f1f1f1;
 }

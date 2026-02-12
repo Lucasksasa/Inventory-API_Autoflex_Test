@@ -1,6 +1,5 @@
 package com.lucasferrari.inventory.service;
 
-import com.lucasferrari.inventory.dto.ProductDTO;
 import com.lucasferrari.inventory.dto.ProductionResultDTO;
 import com.lucasferrari.inventory.entity.Product;
 import com.lucasferrari.inventory.entity.ProductRawMaterial;
@@ -24,7 +23,6 @@ public class ProductionService {
 
         List<Product> products = productRepository.findAll();
 
-        // Ordena por preço DESC (mais caro primeiro)
         products.sort((p1, p2) -> p2.getPrice().compareTo(p1.getPrice()));
 
         List<ProductionResultDTO> result = new ArrayList<>();

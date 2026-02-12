@@ -1,7 +1,6 @@
 package com.lucasferrari.inventory.service;
 
 
-import com.lucasferrari.inventory.dto.ProductDTO;
 import com.lucasferrari.inventory.entity.Product;
 import com.lucasferrari.inventory.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

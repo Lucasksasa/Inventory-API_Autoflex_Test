@@ -47,7 +47,7 @@ public class ProductRawMaterialService {
                 .productId(saved.getProduct().getId())
                 .rawMaterialId(saved.getRawMaterial().getId())
                 .requiredQuantity(saved.getRequiredQuantity())
-                .rawMaterialName(saved.getRawMaterial().getName()) // agora envia o nome
+                .rawMaterialName(saved.getRawMaterial().getName())
                 .build();
     }
 

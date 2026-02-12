@@ -65,5 +65,4 @@ linkBtn.addEventListener('click', async () => {
     loadLinkedRawMaterials(selectedProductId);
 });
 
-// Initial load
 loadData();
