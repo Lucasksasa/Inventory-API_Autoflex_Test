@@ -6,7 +6,7 @@ const linkedList = document.getElementById('linkedList');
 
 let selectedProductId = null;
 
-// Fetch products and raw materials
+
 async function loadData() {
     const products = await fetch('/products').then(res => res.json());
     products.forEach(p => {
@@ -24,7 +24,7 @@ async function loadData() {
         rawMaterialSelect.appendChild(option);
     });
 
-    // Load linked raw materials for the first product
+
     if (products.length > 0) {
         selectedProductId = products[0].id;
         loadLinkedRawMaterials(selectedProductId);
@@ -38,12 +38,12 @@ async function loadLinkedRawMaterials(productId) {
 
     linked.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = `Raw Material ID: ${item.rawMaterialId} - Required Quantity: ${item.requiredQuantity}`;
+        li.textContent = `${item.rawMaterialName} - Required Quantity: ${item.requiredQuantity}`;
         linkedList.appendChild(li);
     });
 }
 
-// Event listeners
+
 productSelect.addEventListener('change', (e) => {
     selectedProductId = e.target.value;
     loadLinkedRawMaterials(selectedProductId);

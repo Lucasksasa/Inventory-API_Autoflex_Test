@@ -21,10 +21,14 @@ public class ProductRawMaterialService {
     private final RawMaterialRepository rawMaterialRepository;
 
     public ProductRawMaterialDTO linkRawMaterialToProduct(
+
             Long productId,
             Long rawMaterialId,
             Integer requiredQuantity
     ) {
+        if (requiredQuantity <= 0) {
+            throw new RuntimeException("Required quantity must be greater than 0");
+        }
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -43,6 +47,7 @@ public class ProductRawMaterialService {
                 .productId(saved.getProduct().getId())
                 .rawMaterialId(saved.getRawMaterial().getId())
                 .requiredQuantity(saved.getRequiredQuantity())
+                .rawMaterialName(saved.getRawMaterial().getName()) // agora envia o nome
                 .build();
     }
 
@@ -53,6 +58,7 @@ public class ProductRawMaterialService {
                         .productId(prm.getProduct().getId())
                         .rawMaterialId(prm.getRawMaterial().getId())
                         .requiredQuantity(prm.getRequiredQuantity())
+                        .rawMaterialName(prm.getRawMaterial().getName())
                         .build())
                 .toList();
     }

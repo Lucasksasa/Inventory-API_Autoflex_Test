@@ -12,4 +12,5 @@ public class ProductRawMaterialDTO {
     private Long productId;
     private Long rawMaterialId;
     private Integer requiredQuantity;
+    private String rawMaterialName;
 }
